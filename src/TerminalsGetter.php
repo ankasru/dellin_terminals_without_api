@@ -6,7 +6,7 @@ use Ankas\DellinTerminalsWithoutApi\Exceptions\ParseTerminalsDataException;
 
 class TerminalsGetter
 {
-    protected const TERMINALS_DATA_PATH = '../data/Terminals.json';
+    protected const TERMINALS_DATA_PATH = '/../data/Terminals.json';
     protected ?array $citiesTerminalsData = null;
 
     public function __construct(protected bool $cacheTerminalsData = true) {}
@@ -20,7 +20,7 @@ class TerminalsGetter
     public function getTerminalsByCode(string $code): ?array
     {
         $citiesTerminalsData = $this->getCitiesTerminalsData();
-        foreach ($citiesTerminalsData as $cityTerminalsData) {
+        foreach ($citiesTerminalsData['city'] as $cityTerminalsData) {
             if ($cityTerminalsData['code'] === $code) {
                 return ['terminals' => $cityTerminalsData['terminals']['terminal']];
             }
@@ -36,7 +36,7 @@ class TerminalsGetter
     protected function getCitiesTerminalsData(): array
     {
         if ($this->citiesTerminalsData === null) {
-            $citiesTerminalsDataContent = file_get_contents(static::TERMINALS_DATA_PATH);
+            $citiesTerminalsDataContent = file_get_contents(__DIR__ . static::TERMINALS_DATA_PATH);
             if ($citiesTerminalsDataContent === false) {
                 throw new ParseTerminalsDataException('Cannot read terminals data file');
             }
