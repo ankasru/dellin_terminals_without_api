@@ -3,7 +3,7 @@
 Salvation from the constantly falling Dellin Api /v1/public/request_terminals.json
 ## Install
 ```console
-composer require ankasru/dellin_terminals_without_api
+composer require ankasru/dellin_terminals_without_api dev-main
 ``` 
 ## Usage
 ```php
